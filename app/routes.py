@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,jsonify
 from app import app
 
 @app.route("/")
@@ -15,3 +15,13 @@ def track_repair():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
+@app.route("/repairs")
+def repairs():
+    repair = [
+        { "id": "R001", "location": "Downtown", "status": "pending" },
+        { "id": "R002", "location": "Uptown", "status": "in_progress" },
+        { "id": "R003", "location": "West Side", "status": "completed" },
+        { "id": "R004", "location": "East Side", "status": "pending" }
+    ]
+    return jsonify(repair),200
