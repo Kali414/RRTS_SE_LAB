@@ -17,19 +17,30 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{{url_for('home')}}">Home</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link active" href="{{url_for('home')}}">Home</a></li> -->
                     <li class="nav-item"><a class="nav-link active" href="{{url_for('report_issue')}}">Report Issue</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{url_for('track_repair')}}">Track Repairs</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{url_for('contact')}}">Contact</a></li>
                 </ul>
-                <div class="d-flex gap-2">
-                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light">
-                        <i class="fas fa-sign-in-alt me-2"></i>Login
-                    </a>
-                    <a href="{{ url_for('auth.signup') }}" class="btn btn-custom">
-                        <i class="fas fa-user-plus me-2"></i>Sign Up
-                    </a>
-                </div>
+                {% if session.get('name') is not none %}
+                    <div class="d-flex gap-2">
+                        <span class="text-light me-2">Welcome, {{ session.name }}!</span>
+                        <a href="{{ url_for('auth.clear_session') }}" class="btn btn-outline-light">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="d-flex gap-2">
+                        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light">
+                            <i class="fas fa-sign-in-alt me-2"></i> Login
+                        </a>
+                        <a href="{{ url_for('auth.signup') }}" class="btn btn-custom">
+                            <i class="fas fa-user-plus me-2"></i> Sign Up
+                        </a>
+                    </div>
+                {% endif %}
+
+
             </div>
         </div>
     </nav>
@@ -85,7 +96,7 @@
                             <h4 class="card-title fw-bold mb-2">Report Issues</h4>
                             <p class="card-text text-muted flex-grow-1">Easily report road issues with location and photos. Our team will assess the situation promptly.</p>
                             <div>
-                                <a href="#" class="btn btn-outline-primary">Learn More</a>
+                                <a href="{{url_for('report_issue')}}" class="btn btn-outline-primary">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -99,7 +110,7 @@
                             <h4 class="card-title fw-bold mb-2">Track Repairs</h4>
                             <p class="card-text text-muted flex-grow-1">Monitor the progress of reported road repairs in real-time with status updates.</p>
                             <div>
-                                <a href="#" class="btn btn-outline-primary">View Repairs</a>
+                                <a href="{{url_for('track_repair')}}" class="btn btn-outline-primary">View Repairs</a>
                             </div>
                         </div>
                     </div>
@@ -210,10 +221,10 @@
                     <div class="col-lg-2 col-md-6 mb-4">
                         <h5 class="mb-3">Quick Links</h5>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
-                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">About Us</a></li>
-                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Services</a></li>
-                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                            <li class="mb-2"><a href="{{url_for('home')}}" class="text-white text-decoration-none">Home</a></li>
+                            <li class="mb-2"><a href="{{url_for('auth.signup')}}" class="text-white text-decoration-none">Sign-Up</a></li>
+                            <li class="mb-2"><a href="{{url_for('auth.login')}}" class="text-white text-decoration-none">Login</a></li>
+                            <li class="mb-2"><a href="{{url_for('contact')}}" class="text-white text-decoration-none">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4">

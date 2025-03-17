@@ -19,13 +19,16 @@
                 <div class="card search-card">
                     <div class="card-body">
                         <form class="row g-3" id="search-form">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                                     <input type="text" id="search-input" class="form-control" placeholder="Search by location or ID">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <input type="text" id="user-id-filter" class="form-control" placeholder="Filter by User ID">
+                            </div>
+                            <div class="col-md-3">
                                 <select id="status-filter" class="form-select">
                                     <option value="">Filter by Status</option>
                                     <option value="pending">Pending</option>
@@ -75,13 +78,14 @@
             }
         }
 
-        function displayRepairs(repairs, filterText = "", filterStatus = "") {
+        function displayRepairs(repairs, filterText = "", filterStatus = "", filterUserId = "") {
             const list = document.getElementById("repair-list");
             list.innerHTML = "";
 
             const filteredRepairs = repairs.filter(repair => 
                 (filterText === "" || repair.location.toLowerCase().includes(filterText.toLowerCase()) || repair.id.toLowerCase().includes(filterText.toLowerCase())) &&
-                (filterStatus === "" || repair.status === filterStatus)
+                (filterStatus === "" || repair.status === filterStatus) &&
+                (filterUserId === "" || repair.user_id.toLowerCase().includes(filterUserId.toLowerCase()))
             );
 
             if (filteredRepairs.length === 0) {
@@ -96,6 +100,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Repair ID: ${repair.id}</h5>
                         <p class="card-text">Location: ${repair.location}</p>
+                        <p class="card-text"><strong>User ID:</strong> ${repair.user_id}</p>
                         <p class="card-text"><strong>Status:</strong> ${repair.status.replace("_", " ").toUpperCase()}</p>
                     </div>
                 `;
@@ -107,9 +112,10 @@
             event.preventDefault();
             const searchText = document.getElementById("search-input").value;
             const filterStatus = document.getElementById("status-filter").value;
+            const filterUserId = document.getElementById("user-id-filter").value;
             fetch("{{url_for('repairs')}}") // Replace with actual API endpoint
                 .then(response => response.json())
-                .then(repairs => displayRepairs(repairs, searchText, filterStatus))
+                .then(repairs => displayRepairs(repairs, searchText, filterStatus, filterUserId))
                 .catch(error => console.error("Error filtering repair data:", error));
         });
 
