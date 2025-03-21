@@ -162,3 +162,12 @@ h1 {
         width: 100%;
     }
 }
+
+.navbar-brand i {
+    color: var(--secondary-color);
+}
+
+.navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 2px 4px rgba(45, 161, 176, 0.1);
+}

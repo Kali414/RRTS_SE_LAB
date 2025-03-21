@@ -1,8 +1,13 @@
-from flask import render_template,jsonify,request,flash,redirect,url_for
+from flask import render_template,jsonify,request,flash,redirect,url_for,session
 import pymongo
 from app import app
 
-client=pymongo.MongoClient("mongodb://localhost:27017")
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+Mongo_URL=os.getenv("Mongo_URL")
+client=pymongo.MongoClient(Mongo_URL)
 db=client["Practice_1"]
 collection=db["Complaints"]
 
@@ -13,8 +18,12 @@ def home():
 
 @app.route("/report_issue", methods=["GET", "POST"])
 def report_issue():
-    if request.method == "GET":
+    if not session.get("name"):
+        return redirect(url_for("auth.login"))
+        
+    if request.method == "GET" :
         return render_template("report_issue.html")
+
     last_issue = collection.find_one(sort=[("issue_id", -1)]) 
     issue_title = request.form.get("title")
     state=request.form.get("state")
@@ -47,18 +56,38 @@ def report_issue():
 
 @app.route("/track-repair")
 def track_repair():
+    if not session.get("name"):
+        return redirect(url_for("auth.login"))
+
     return render_template("track_repair.html")
 
-@app.route("/contact")
+@app.route("/contact",methods=["GET","POST"])
 def contact():
     return render_template("contact.html")
 
+
 @app.route("/repairs")
 def repairs():
-    repair = [
-        { "id": "R001", "location": "Downtown", "status": "pending" },
-         { "id": "R002", "location": "Uptown", "status": "in_progress" },
-        { "id": "R003", "location": "West Side", "status": "completed" },
-        { "id": "R004", "location": "East Side", "status": "pending" }
-    ]
+
+    if(request.method=="GET"):
+        query = list(collection.find().limit(10))
+        return jsonify(query),200
+    
+    city = request.form.get("city")
+    user_id = request.form.get("user_id")
+    status = request.form.get("status")
+
+    query = {"$or": [{"city": city}, {"user_id": user_id}, {"status": status}]}
+
+    repair = list(collection.find(query))
+    print(repair)
+
+    
+    # repair = [
+    #     { "id": "R001", "location": "Downtown", "status": "pending" },
+    #      { "id": "R002", "location": "Uptown", "status": "in_progress" },
+    #     { "id": "R003", "location": "West Side", "status": "completed" },
+    #     { "id": "R004", "location": "East Side", "status": "pending" }
+    # ]
+
     return jsonify(repair),200
