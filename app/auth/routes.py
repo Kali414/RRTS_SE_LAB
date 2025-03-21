@@ -1,15 +1,8 @@
 from flask import render_template,url_for,redirect,request,session
-import pymongo
-
+from db import resident,supervisor,city_admin,mayor,complaint,issues
 
 from app.auth import auth
 
-import os
-from dotenv import load_dotenv
-load_dotenv()
-Mongo_URL=os.getenv("Mongo_URL")
-client=pymongo.MongoClient(Mongo_URL)
-db=client["Practice_1"]
 #collection=db["user_data"]
 
 @auth.route("/login", methods=["GET", "POST"])
@@ -20,8 +13,8 @@ def login():
         role=request.form.get("role")
 
         if(role=="resident"):
-            collection=db["Resident"]
-            user = collection.find_one({"email": email, "password": password})
+            
+            user = resident.find_one({"email": email, "password": password})
         
             if user:
                 session["name"] = user["first_name"] + " " + user["last_name"]
@@ -30,8 +23,8 @@ def login():
                 return redirect(url_for("auth.signup"))
 
         elif(role=="Supervisor"):
-            collection=db["Supervisor"]
-            user = collection.find_one({"email": email, "password": password})
+            
+            user = supervisor.find_one({"email": email, "password": password})
         
             if user:
                 # return redirect("Link for supervisor",name=first_name+" "+last_name,role=role,email=email)
@@ -40,8 +33,8 @@ def login():
                 return redirect(url_for("auth.signup"))
             
         elif(role=="City Admin"):
-            collection=db["City_Admin"]
-            user = collection.find_one({"email": email, "password": password})
+            
+            user = city_admin.find_one({"email": email, "password": password})
         
             if user:
                 # return redirect("Link for City admin",name=first_name+" "+last_name,role=role,email=email)
@@ -50,8 +43,8 @@ def login():
                 return redirect(url_for("auth.signup"))
             
         else:
-            collection=db["Mayor"]
-            user = collection.find_one({"email": email, "password": password})
+
+            user = mayor.find_one({"email": email, "password": password})
         
             if user:
                 # return redirect("Link for supervisor",name=first_name+" "+last_name,role=role,email=email)
@@ -89,12 +82,11 @@ def signup():
             print(role)
 
             if(role=="resident"):
-                collection=db["Resident"]
-                user = collection.find_one({"email": email, "password": password})
+                user = resident.find_one({"email": email, "password": password})
                 if user:
                     return redirect(url_for("auth.login"))
                 # Attempt to find the document with the highest _id
-                last_doc = collection.find_one(sort=[("_id", -1)])
+                last_doc = resident.find_one(sort=[("_id", -1)])
 
                 if last_doc is None:
                     # If no document is found, start with "R001"
@@ -110,19 +102,18 @@ def signup():
                 data["_id"] = new_id
 
                 # Insert the new document into the collection
-                collection.insert_one(data)
+                resident.insert_one(data)
                 session["name"]=first_name+" "+last_name
                 session["role"]=role
                 session["email"]=email
                 return redirect(url_for("home"))
 
             elif(role=="supervisor"):
-                collection=db["Supervisor"]
-                user = collection.find_one({"email": email, "password": password})
+                user = supervisor.find_one({"email": email, "password": password})
                 if user:
                     return redirect(url_for("auth.login"))
                 #Attempt to find the document with the highest _id
-                last_doc = collection.find_one(sort=[("_id", -1)])
+                last_doc = supervisor.find_one(sort=[("_id", -1)])
 
                 if last_doc is None:
                     # If no document is found, start with "R001"
@@ -141,13 +132,12 @@ def signup():
                 return redirect(url_for("home"))
 
             elif(role=="city_admin"):
-                collection=db["City_admin"]
-                user = collection.find_one({"email": email, "password": password})
+                user = city_admin.find_one({"email": email, "password": password})
                 if user:
                     return redirect(url_for("auth.login"))
 
                 #Attempt to find the document with the highest _id
-                last_doc = collection.find_one(sort=[("_id", -1)])
+                last_doc = city_admin.find_one(sort=[("_id", -1)])
 
                 if last_doc is None:
                     # If no document is found, start with "R001"
@@ -166,13 +156,12 @@ def signup():
                 return redirect(url_for("home"))
 
             else:
-                collection=db["Mayor"]
-                user = collection.find_one({"email": email, "password": password})
+                user = mayor.find_one({"email": email, "password": password})
                 if user:
                     return redirect(url_for("auth.login"))
 
                 #Attempt to find the document with the highest _id
-                last_doc = collection.find_one(sort=[("_id", -1)])
+                last_doc = mayor.find_one(sort=[("_id", -1)])
 
                 if last_doc is None:
                     # If no document is found, start with "M001"

@@ -1,15 +1,8 @@
 from flask import render_template,jsonify,request,flash,redirect,url_for,session
-import pymongo
 from app import app
 
+from db import resident,supervisor,city_admin,mayor,complaint,issues
 
-import os
-from dotenv import load_dotenv
-load_dotenv()
-Mongo_URL=os.getenv("Mongo_URL")
-client=pymongo.MongoClient(Mongo_URL)
-db=client["Practice_1"]
-collection=db["Complaints"]
 
 @app.route("/")
 def home():
@@ -24,7 +17,6 @@ def report_issue():
     if request.method == "GET" :
         return render_template("report_issue.html")
 
-    last_issue = collection.find_one(sort=[("issue_id", -1)]) 
     issue_title = request.form.get("title")
     state=request.form.get("state")
     city=request.form.get("city")
@@ -46,7 +38,7 @@ def report_issue():
             "image":image.read()
 
         }
-        collection.insert_one(data)
+        complaint.insert_one(data)
         flash("Issue reported successfully!", "success")
         return redirect(url_for("home"))
     else:
@@ -70,7 +62,7 @@ def contact():
 def repairs():
 
     if(request.method=="GET"):
-        query = list(collection.find().limit(10))
+        query = list(complaint.find().limit(10))
         return jsonify(query),200
     
     city = request.form.get("city")
@@ -79,7 +71,7 @@ def repairs():
 
     query = {"$or": [{"city": city}, {"user_id": user_id}, {"status": status}]}
 
-    repair = list(collection.find(query))
+    repair = list(complaint.find(query))
     print(repair)
 
     
