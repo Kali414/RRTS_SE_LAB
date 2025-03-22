@@ -1,8 +1,7 @@
 from flask import render_template,jsonify,request,flash,redirect,url_for,session
 from app import app
 
-from db import resident,supervisor,city_admin,mayor,complaint,issues
-
+from database import resident,supervisor,city_admin,mayor,complaint,issues,db
 
 @app.route("/")
 def home():

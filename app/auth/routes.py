@@ -1,5 +1,5 @@
 from flask import render_template,url_for,redirect,request,session
-from db import resident,supervisor,city_admin,mayor,complaint,issues
+from database import resident,supervisor,city_admin,mayor,complaint,issues,db
 
 from app.auth import auth
 
