@@ -127,7 +127,7 @@ def signup():
 
                 # Add the new _id to the data dictionary
                 data["_id"] = new_id
-                collection.insert_one(data)
+                supervisor.insert_one(data)
                 # return redirect("Link for supervisor",name=first_name+" "+last_name,role=role,email=email)
                 return redirect(url_for("home"))
 
@@ -151,7 +151,7 @@ def signup():
 
                 # Add the new _id to the data dictionary
                 data["_id"] = new_id
-                collection.insert_one(data)
+                city_admin.insert_one(data)
                 # return redirect("Link for city admin",name=first_name+" "+last_name,role=role,email=email)
                 return redirect(url_for("home"))
 
@@ -175,7 +175,7 @@ def signup():
 
                 # Add the new _id to the data dictionary
                 data["_id"] = new_id
-                collection.insert_one(data)
+                mayor.insert_one(data)
                  # return redirect("Link for mayor",name=first_name+" "+last_name,role=role,email=email)
                 return redirect(url_for("home"))
             
