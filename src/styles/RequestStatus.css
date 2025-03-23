@@ -1,0 +1,256 @@
+.request-status-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin: 2rem;
+}
+
+.request-status-title {
+  color: #1e293b;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.request-status-title::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: #3b82f6;
+  border-radius: 2px;
+}
+
+.request-status-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.request-status-table th {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.request-status-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.request-status-table tr:last-child td {
+  border-bottom: none;
+}
+
+.request-status-table tr:hover {
+  background-color: #f8fafc;
+  transition: background-color 0.2s ease;
+}
+
+.status-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-completed {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-completed::before {
+  background-color: #16a34a;
+}
+
+.status-in-progress {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-in-progress::before {
+  background-color: #3b82f6;
+}
+
+.priority-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priority-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.priority-high {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.priority-high::before {
+  background-color: #dc2626;
+}
+
+.priority-medium {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.priority-medium::before {
+  background-color: #d97706;
+}
+
+.priority-low {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.priority-low::before {
+  background-color: #16a34a;
+}
+
+.completion-date {
+  color: #64748b;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.completion-date::before {
+  content: '✓';
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-bar {
+  width: 100px;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3b82f6;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.no-requests {
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  color: #64748b;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.no-requests::before {
+  content: '📋';
+  font-size: 2rem;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  color: #475569;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loading-state::before {
+  content: '⌛';
+  font-size: 2rem;
+}
+
+.error-state {
+  text-align: center;
+  padding: 3rem;
+  background-color: #fef2f2;
+  border-radius: 12px;
+  color: #991b1b;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #fecaca;
+}
+
+.error-state::before {
+  content: '⚠️';
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .request-status-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .request-status-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .request-status-table th,
+  .request-status-table td {
+    padding: 0.75rem;
+  }
+
+  .status-badge,
+  .priority-badge {
+    padding: 0.25rem 0.5rem;
+  }
+} 

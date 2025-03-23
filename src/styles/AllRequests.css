@@ -1,0 +1,335 @@
+.all-requests-container {
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  min-height: 80vh;
+  width: 96%;
+  max-width: 1600px;
+  overflow: hidden;
+}
+
+.all-requests-title {
+  font-size: 1.75rem;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.table-container {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.all-requests-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.95rem;
+}
+
+.header-row {
+  background: #f8fafc;
+}
+
+.all-requests-table th,
+.all-requests-table td {
+  padding: 1rem;
+}
+
+/* Adjust ID column width and padding */
+.all-requests-table th:first-child,
+.all-requests-table td:first-child {
+  padding-right: 0.5rem;  /* Reduce right padding of ID column */
+  min-width: 120px;
+}
+
+/* Adjust Location column width and padding */
+.all-requests-table th:nth-child(2),
+.all-requests-table td:nth-child(2) {
+  padding-left: 0.5rem;  /* Reduce left padding of Location column */
+  min-width: 200px;
+}
+
+/* Keep other columns as they are */
+.all-requests-table td:nth-child(3) { /* Description column */
+  min-width: 300px;
+}
+
+.all-requests-table td:nth-child(4), /* Priority column */
+.all-requests-table td:nth-child(5), /* Date column */
+.all-requests-table td:nth-child(6) { /* Status column */
+  min-width: 140px;
+  white-space: nowrap;
+}
+
+.all-requests-table td:nth-child(7) { /* Action column */
+  min-width: 120px;
+}
+
+.priority-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.priority-tag.high {
+  background-color: #fecaca;
+  color: #991b1b;
+}
+
+.priority-tag.medium {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.priority-tag.low {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-tag {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-block;
+  text-align: center;
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.status-tag.in-progress {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-tag.completed {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+/* Add new style for pending status */
+.status-tag.pending {
+  background-color: #fef9c3;  /* Light yellow background */
+  color: #854d0e;  /* Dark yellow/brown text */
+}
+
+.view-button {
+  padding: 0.5rem 1rem;
+  background-color: #6366f1; /* Indigo color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  width: auto;
+  min-width: 100px;
+}
+
+.view-button:hover {
+  background-color: #4f46e5; /* Darker indigo on hover */
+}
+
+/* Make table more responsive */
+@media (max-width: 1024px) {
+  .all-requests-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .all-requests-table th,
+  .all-requests-table td {
+    padding: 0.75rem;
+  }
+
+  .view-button {
+    padding: 0.4rem 0.8rem;
+    min-width: 90px;
+  }
+}
+
+/* Ensure table is scrollable on mobile */
+@media (max-width: 768px) {
+  .all-requests-container {
+    padding: 1rem;
+  }
+
+  .all-requests-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.details-row {
+  background-color: #f8fafc;
+}
+
+.details-container {
+  padding: 1.5rem;
+  margin: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.details-header h3 {
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.details-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.details-section {
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.details-section h4 {
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.details-section p {
+  color: #475569;
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.details-section strong {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.resources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.resources-list li {
+  color: #475569;
+  padding: 0.25rem 0;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.resources-list li:not(:last-child) {
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.view-button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.view-button:disabled:hover {
+  background-color: #cbd5e1;
+  transform: none;
+}
+
+/* Add these new styles for the modal */
+.details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 1000;
+  padding-top: 100px;
+}
+
+.details-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: calc(90vh - 100px);
+  overflow-y: auto;
+  margin-bottom: 20px;
+  margin-right: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.details-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.details-section h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+.resources-list {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.resources-list li {
+  margin-bottom: 5px;
+} 
