@@ -18,31 +18,10 @@ The **Road Repair and Tracking System (RRTS)** is designed to automate various b
 4. **Mayor:** Views repair statistics and overall progress reports.  
 
 ## **Technology Stack**  
-- **Backend:** Python (Flask/Django) or Node.js  
-- **Frontend:** HTML, CSS, JavaScript (React.js/Angular)  
-- **Database:** PostgreSQL/MySQL/MongoDB  
-- **Hosting:** Render/Heroku/AWS  
-
-## **Installation & Setup**  
-1. **Clone the repository:**  
-   ```sh
-   git clone https://github.com/yourusername/RRTS.git  
-   cd RRTS  
-   ```  
-2. **Install dependencies:**  
-   ```sh
-   pip install -r requirements.txt  # For Python-based backend  
-   npm install  # If using Node.js  
-   ```  
-3. **Run the server:**  
-   ```sh
-   python app.py  # Flask/Django  
-   npm start  # If using Node.js  
-   ```  
-4. **Access the system via:**  
-   ```sh
-   http://127.0.0.1:5000/  
-   ```  
+- **Backend:** Python (Flask) and SpringBoot (Java)  
+- **Frontend:** HTML, CSS, JavaScript 
+- **Database:** MongoDB  
+- **Hosting:** Render
 
 ## **Future Enhancements**  
 - **Mobile App Support** for field supervisors.  
