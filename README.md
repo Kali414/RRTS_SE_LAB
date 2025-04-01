@@ -12,7 +12,7 @@ The **Road Repair and Tracking System (RRTS)** is designed to automate various b
 - **Reporting & Statistics:** The mayor can generate reports on repair progress, outstanding work, and resource utilization.  
 
 ## **System Users**  
-1. **Clerk:** Records repair requests submitted by residents.  
+1. **Resident:** Submit repair requests.  
 2. **Supervisor:** Assesses road conditions, prioritizes repairs, and estimates resources.  
 3. **City Corporation Administrator:** Manages resource availability and updates workforce/machine data.  
 4. **Mayor:** Views repair statistics and overall progress reports.  
